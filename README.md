@@ -1,2 +1,3 @@
 # ProgettoPokeAPI
-Progetto pokemon API
+
+## Linguaggio usato -> Java
