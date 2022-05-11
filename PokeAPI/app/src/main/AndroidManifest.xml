@@ -10,8 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProgettoPokeAPI">
         <activity
+            android:name=".ListActivity"
+            android:exported="false"
+            android:label="ListActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+
+        <activity
             android:name=".PokemonActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="PokemonActivity"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true">

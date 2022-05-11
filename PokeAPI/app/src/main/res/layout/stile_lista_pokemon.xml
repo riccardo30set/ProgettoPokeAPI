@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txtNomePokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/imgPokemon"
+        android:layout_toRightOf="@+id/imgPokemon"
+        android:maxLines="1"
+        android:text="Nome Pokemon"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtTipoPokemon"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtNomePokemon"
+        android:layout_alignLeft="@+id/txtNomePokemon"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="125dp"
+        android:maxLines="1"
+        android:text="Erba"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imgPokemon"
+        android:layout_width="103dp"
+        android:layout_height="78dp" />
+
+
+</RelativeLayout>
