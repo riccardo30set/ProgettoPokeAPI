@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.Window;
 
 import androidx.annotation.Nullable;
 
@@ -25,17 +26,19 @@ public class CanvasPokemon extends View{
     private Bitmap b;
 
 
+
     public CanvasPokemon(Context context) {
         super(context);
         paint=new Paint();
         rect=new Rect();
         cerchio=new Paint();
         bordoCerchio=new Paint();
-        b= BitmapFactory.decodeResource(getResources(),R.drawable.pokemon2);
-        x=400;
-        y=300;
-        velx=5;
-        vely=1000;
+
+        b=BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+
+
+        x=90;
+        y=130;
 
     }
 
@@ -58,26 +61,19 @@ public class CanvasPokemon extends View{
 
 
 
+
         canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight()/2,paint);
 
-        canvas.drawLine(1100,930,0, 930, bordoCerchio);
+        canvas.drawLine(1200,1000,0, 1000, bordoCerchio);
 
-        canvas.drawCircle(530,1000, 360, bordoCerchio);
+        canvas.drawCircle(545,1000, 360, bordoCerchio);
 
-        canvas.drawCircle(530,1000, 300, cerchio);
+        canvas.drawCircle(545,1000, 300, cerchio);
 
         canvas.drawBitmap(b,x,y,null);
 
-        x+=velx;
-        y+=vely;
-        if(x+b.getWidth()>canvas.getWidth() || x<0){
-            velx=-velx;
-        }
-        if(y+b.getHeight()>canvas.getHeight() || y<0){
-            vely=-vely;
-        }
 
-        invalidate();
+
 
 
 

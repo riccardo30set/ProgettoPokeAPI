@@ -12,7 +12,9 @@
         <activity
             android:name=".ListActivity"
             android:exported="false"
-            android:label="ListActivity">
+            android:label="ListActivity"
+            android:theme="@style/Theme.ProgettoPokeAPI.NoActionBar"
+            >
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -24,10 +26,13 @@
             android:name=".PokemonActivity"
             android:exported="false"
             android:label="PokemonActivity"
+            
             />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.ProgettoPokeAPI.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
