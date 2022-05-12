@@ -9,23 +9,27 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintSet;
 
-public class CanvasPokemon extends View{
+public class CanvasPokemon extends View implements View.OnClickListener{
 
     Paint paint;
     Rect rect;
     Paint cerchio;
     Paint bordoCerchio;
 
+
     private float x,y;
     private float velx,vely;
-    private Bitmap b;
-
-
+    private Bitmap logo;
+    private Bitmap pikachu;
 
     public CanvasPokemon(Context context) {
         super(context);
@@ -34,7 +38,12 @@ public class CanvasPokemon extends View{
         cerchio=new Paint();
         bordoCerchio=new Paint();
 
-        b=BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+        setOnClickListener(this);
+
+        logo=BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+        pikachu=BitmapFactory.decodeResource(getResources(),R.drawable.pokemon25);
+
+
 
 
         x=90;
@@ -50,7 +59,6 @@ public class CanvasPokemon extends View{
 
         bordoCerchio.setColor(Color.BLACK);
         bordoCerchio.setStrokeWidth(50);
-
 
 
         paint.setColor(Color.RED);
@@ -70,19 +78,19 @@ public class CanvasPokemon extends View{
 
         canvas.drawCircle(545,1000, 300, cerchio);
 
-        canvas.drawBitmap(b,x,y,null);
+        canvas.drawBitmap(logo,x,y,null);
 
-
-
-
-
-
-
-
-
-
-
+        canvas.drawBitmap(pikachu,400,400,null);
 
     }
 
+
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(getContext(),ListActivity.class);
+
+        getContext().startActivity(intent);
+
+
+    }
 }

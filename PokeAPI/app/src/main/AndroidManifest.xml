@@ -13,7 +13,7 @@
             android:name=".ListActivity"
             android:exported="false"
             android:label="ListActivity"
-            android:theme="@style/Theme.ProgettoPokeAPI.NoActionBar"
+            android:parentActivityName=".MainActivity"
             >
 
             <meta-data
@@ -26,7 +26,7 @@
             android:name=".PokemonActivity"
             android:exported="false"
             android:label="PokemonActivity"
-            
+            android:parentActivityName=".ListActivity"
             />
         <activity
             android:name=".MainActivity"

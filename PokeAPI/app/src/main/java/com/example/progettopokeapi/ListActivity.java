@@ -39,7 +39,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Toast.makeText(ListActivity.this, "prova", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
 
 
 
