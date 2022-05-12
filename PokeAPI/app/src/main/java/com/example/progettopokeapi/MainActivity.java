@@ -18,8 +18,5 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(canvas);
 
-        Intent intent =new Intent(this,ListActivity.class);
-
-        startActivity(intent);
     }
 }
