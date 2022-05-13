@@ -84,7 +84,7 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
         canvas.drawCircle(545,canvas.getClipBounds().centerY(), 300, cerchio);
 
-        canvas.drawBitmap(logo,80,canvas.getClipBounds().top,null);
+        canvas.drawBitmap(logo,canvas.getClipBounds().left+70,canvas.getClipBounds().left,null);
 
         canvas.drawBitmap(pikachu,400,400,null);
 
