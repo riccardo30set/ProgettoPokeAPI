@@ -9,7 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     CanvasPokemon canvas;
 

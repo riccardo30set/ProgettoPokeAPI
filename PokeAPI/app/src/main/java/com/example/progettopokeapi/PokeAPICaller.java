@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pokeapi;
+package com.example.progettopokeapi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,19 +54,15 @@ public class PokeAPICaller {
         return this.restCall(this.urlPokemonList);
     }
     
-    protected String getPokemon(String pokemon) throws IOException{
+    public String getPokemon(String pokemon) throws IOException{
         String link=this.urlPokemon+pokemon;
         return this.restCall(link);
     }
-    protected String getPokemon(int pokemon) throws IOException{
+    public String getPokemon(int pokemon) throws IOException{
         String link=this.urlPokemon+pokemon;
         return this.restCall(link);
     }
     
-    /*private String getPokemonDescription(String pokemon) throws IOException{
-        String result=this.getPokemonSpecies(pokemon);
-        JSONObject json = new JSONObject(result);
-        String loudScreaming = json.getJSONObject("LabelData").getString("slogan");
-    }*/
+
    
 }
