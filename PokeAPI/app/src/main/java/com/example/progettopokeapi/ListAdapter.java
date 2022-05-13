@@ -1,12 +1,16 @@
 package com.example.progettopokeapi;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
 
@@ -14,6 +18,7 @@ public class ListAdapter extends BaseAdapter {
     private final String[] tipoPokemon;
     private final String[] nomePokemon;
     private final int[] img;
+
 
     public ListAdapter(Context context, String[] tipoPokemon, String[] nomePokemon, int[] img) {
         this.context = context;
@@ -66,6 +71,13 @@ public class ListAdapter extends BaseAdapter {
         return view;
     }
 
+
+
+
+
+
+
+
     private static class ViewHolder {
 
         TextView  txtNomePokemon;
@@ -73,4 +85,5 @@ public class ListAdapter extends BaseAdapter {
         ImageView imgPokemon;
 
     }
+
 }

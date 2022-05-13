@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ProgettoPokeAPI</string>
-    <string name="ListActivity">POKEDEX</string>
+    <string name="ListActivity"> </string>
     <string name="PokemonActivity">Informazioni nomePokemon</string>
 </resources>

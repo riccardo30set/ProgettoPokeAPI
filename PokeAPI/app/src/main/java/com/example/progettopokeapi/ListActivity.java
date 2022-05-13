@@ -1,14 +1,16 @@
 package com.example.progettopokeapi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,22 +39,23 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         String id;
+
         this.RestCallPokemonNames();
         //ATTENZIONE, questi nomi sono qui perche la rest call viene eseguita su un thread a parte, quindi capita che l'adapter carichi l'array prima che venga modificato.
 
-        nome[0]="bulbasaur";
-        nome[1]="ivysaur";
-        nome[2]="venusaur";
-        nome[3]="charmander";
-        nome[4]="charmeleon";
-        nome[5]="charizard";
-        nome[6]="squirtle";
-        nome[7]="wartortle";
-        nome[8]="blastoise";
-        nome[9]="caterpie";
-        nome[10]="metapod";
-        nome[11]="butterfree";
-        nome[12]="weedle";
+        nome[0]="Bulbasaur";
+        nome[1]="Ivysaur";
+        nome[2]="Venusaur";
+        nome[3]="Charmander";
+        nome[4]="Charmeleon";
+        nome[5]="Charizard";
+        nome[6]="Squirtle";
+        nome[7]="Wartortle";
+        nome[8]="Blastoise";
+        nome[9]="Caterpie";
+        nome[10]="Metapod";
+        nome[11]="Butterfree";
+        nome[12]="Weedle";
 
         for(int i=1; i<899;i++){
             id="pokemon"+i;
@@ -75,13 +78,7 @@ public class ListActivity extends AppCompatActivity {
         listaPokemon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 startActivity(intent);
-
-
-
-
-
             }
         });
 
@@ -98,6 +95,7 @@ public class ListActivity extends AppCompatActivity {
                                 for(int i=1;i<899;i++){
                                     try {
                                         nome[i-1]=response.getJSONArray("pokemon_entries").getJSONObject(i-1).getJSONObject("pokemon_species").getString("name");
+                                        nome[i-1]=nome[i-1].substring(0,1).toUpperCase()+nome[i-1].substring(1,nome[i-1].length());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -112,5 +110,37 @@ public class ListActivity extends AppCompatActivity {
                     }
                 });
         queue.add(jsonObjectRequest);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){  getMenuInflater().inflate(R.menu.menu,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Cerca il Pokemon");
+        searchView.animate();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+
+
+
+
+
+                return false;
+            }
+        });
+
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
