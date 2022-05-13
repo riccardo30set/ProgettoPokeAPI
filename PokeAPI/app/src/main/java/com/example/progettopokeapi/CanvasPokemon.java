@@ -46,8 +46,6 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
 
 
-        x=90;
-        y=130;
 
     }
 
@@ -56,13 +54,20 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
         cerchio.setColor(Color.WHITE);
         cerchio.setStrokeWidth(500);
+        cerchio.setTextAlign(Paint.Align.CENTER);
 
         bordoCerchio.setColor(Color.BLACK);
         bordoCerchio.setStrokeWidth(50);
+        bordoCerchio.setTextAlign(Paint.Align.CENTER);
 
 
         paint.setColor(Color.RED);
         paint.setStrokeWidth(5);
+        paint.setTextAlign(Paint.Align.CENTER);
+
+
+
+
 
         canvas.drawColor(Color.WHITE);
 
@@ -70,15 +75,16 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
 
 
+
         canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight()/2,paint);
 
-        canvas.drawLine(1200,1000,0, 1000, bordoCerchio);
+        canvas.drawLine(1200,canvas.getClipBounds().centerY(), 0, canvas.getClipBounds().centerY(), bordoCerchio);
 
-        canvas.drawCircle(545,1000, 360, bordoCerchio);
+        canvas.drawCircle(545,canvas.getClipBounds().centerY(), 360, bordoCerchio);
 
-        canvas.drawCircle(545,1000, 300, cerchio);
+        canvas.drawCircle(545,canvas.getClipBounds().centerY(), 300, cerchio);
 
-        canvas.drawBitmap(logo,x,y,null);
+        canvas.drawBitmap(logo,80,canvas.getClipBounds().top,null);
 
         canvas.drawBitmap(pikachu,400,400,null);
 
@@ -93,4 +99,5 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
 
     }
+
 }

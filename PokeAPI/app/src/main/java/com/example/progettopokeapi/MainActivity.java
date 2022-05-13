@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         canvas=new CanvasPokemon(this);
 
-        setContentView(canvas);
 
-        AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
+        setContentView(canvas);
 
     }
 
