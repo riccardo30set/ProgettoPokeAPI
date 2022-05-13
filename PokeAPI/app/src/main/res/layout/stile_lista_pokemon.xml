@@ -7,32 +7,36 @@
 
     <TextView
         android:id="@+id/txtNomePokemon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="53dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="19dp"
         android:layout_toEndOf="@+id/imgPokemon"
         android:layout_toRightOf="@+id/imgPokemon"
+        android:fontFamily="@font/pokemon_pixel_font"
         android:maxLines="1"
         android:text="Nome Pokemon"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="39sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtTipoPokemon"
-        android:layout_width="131dp"
-        android:layout_height="wrap_content"
+        android:layout_width="134dp"
+        android:layout_height="29dp"
         android:layout_alignStart="@+id/txtNomePokemon"
         android:layout_alignLeft="@+id/txtNomePokemon"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="159dp"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/pokemon_pixel_font"
         android:maxLines="1"
         android:text="Erba"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <ImageView
