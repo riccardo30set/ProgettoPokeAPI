@@ -9,17 +9,20 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-public class CanvasPokemon extends View implements View.OnClickListener{
+public class CanvasPokemon extends View implements View.OnClickListener, View.OnLongClickListener{
 
     Paint paint;
     Rect rect;
@@ -27,11 +30,16 @@ public class CanvasPokemon extends View implements View.OnClickListener{
     Paint bordoCerchio;
     Matrix matrix;
 
+    Paint On;
+
 
     private float x,y;
     private float velx,vely;
     private Bitmap logo;
     private Bitmap pikachu;
+
+
+    private MediaPlayer Easter_EGG;
 
     public CanvasPokemon(Context context) {
         super(context);
@@ -40,11 +48,17 @@ public class CanvasPokemon extends View implements View.OnClickListener{
         cerchio=new Paint();
         bordoCerchio=new Paint();
         matrix=new Matrix();
+        On=new Paint();
 
         setOnClickListener(this);
+        setOnLongClickListener(this);
 
         logo=BitmapFactory.decodeResource(getResources(),R.drawable.logo);
         pikachu=BitmapFactory.decodeResource(getResources(),R.drawable.pokemon25);
+
+        Easter_EGG=MediaPlayer.create(context,R.raw.easter);
+
+
 
 
 
@@ -108,4 +122,18 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
     }
 
+
+    @Override
+    public boolean onLongClick(View view) {
+
+        Easter_EGG.start();
+
+
+
+
+
+        Toast.makeText(getContext(),"porcodio",Toast.LENGTH_SHORT).show();
+
+        return false;
+    }
 }
