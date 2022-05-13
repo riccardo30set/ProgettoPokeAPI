@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -24,6 +25,7 @@ public class CanvasPokemon extends View implements View.OnClickListener{
     Rect rect;
     Paint cerchio;
     Paint bordoCerchio;
+    Matrix matrix;
 
 
     private float x,y;
@@ -37,6 +39,7 @@ public class CanvasPokemon extends View implements View.OnClickListener{
         rect=new Rect();
         cerchio=new Paint();
         bordoCerchio=new Paint();
+        matrix=new Matrix();
 
         setOnClickListener(this);
 
@@ -66,6 +69,11 @@ public class CanvasPokemon extends View implements View.OnClickListener{
         paint.setTextAlign(Paint.Align.CENTER);
 
 
+        matrix.reset();
+        matrix.postTranslate(canvas.getWidth()/90,-canvas.getHeight()/50);
+        matrix.postRotate(-10);
+
+
 
 
 
@@ -86,7 +94,7 @@ public class CanvasPokemon extends View implements View.OnClickListener{
 
         canvas.drawBitmap(logo,canvas.getClipBounds().left+70,canvas.getClipBounds().left,null);
 
-        canvas.drawBitmap(pikachu,400,400,null);
+        canvas.drawBitmap(pikachu,matrix,null);
 
     }
 
