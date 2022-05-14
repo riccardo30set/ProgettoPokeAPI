@@ -129,11 +129,6 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
         Easter_EGG.start();
 
 
-
-
-
-        Toast.makeText(getContext(),"porcodio",Toast.LENGTH_SHORT).show();
-
         return false;
     }
 }

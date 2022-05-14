@@ -77,6 +77,7 @@ public class PokemonActivity extends AppCompatActivity {
                                     //['sprites']['front_default']
                                     String imageUrl= response.getJSONObject("sprites").getString("font_default");
                                     URL url = new URL(imageUrl);
+                                    //scherzo fadda ti amo uwuwuwuwu
                                     HttpURLConnection connection  = (HttpURLConnection) url.openConnection();
                                     InputStream is = connection.getInputStream();
                                     Bitmap img = BitmapFactory.decodeStream(is);
