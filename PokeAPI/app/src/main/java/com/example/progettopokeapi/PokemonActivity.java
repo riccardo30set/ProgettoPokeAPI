@@ -3,10 +3,12 @@ package com.example.progettopokeapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,6 +52,11 @@ public class PokemonActivity extends AppCompatActivity {
         String pokemonId=intent.getStringExtra("pokemonId");
         String url = "https://pokeapi.co/api/v2/pokemon/"+pokemonId;
 
+        Resources res = getResources();
+        String mDrawableName = "pokemon"+pokemonId;
+        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
+        pokemonImageView.setImageResource(resID);
+
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONObject>() {
@@ -58,23 +65,31 @@ public class PokemonActivity extends AppCompatActivity {
                                 try {
                                     String pokemonName=response.getString("name");
                                     setTitle(pokemonName);
-                                    heightTextView.setText(response.getString("height"));
-                                    weightTextView.setText(response.getString("weight"));
+                                    Float height=Float.parseFloat(response.getString("height"))/10;
+                                    heightTextView.setText(height.toString()+"m");
+                                    Float weight=Float.parseFloat(response.getString("weight"))/10;
+                                    weightTextView.setText(weight.toString()+"kg");
+
                                     hpProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(0).getInt("base_stat"));
                                     attackProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(1).getInt("base_stat"));
                                     defenseProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(2).getInt("base_stat"));
                                     specialAttackProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(3).getInt("base_stat"));
                                     specialDefenseProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(4).getInt("base_stat"));
                                     speedProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(5).getInt("base_stat"));
-                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
-                                    String types="";
                                     JSONArray arrayTypes=response.getJSONArray("types");
+                                    String types="";
                                     for (int i=0;i<arrayTypes.length();i++){
                                         String type=arrayTypes.getJSONObject(i).getJSONObject("type").getString("name");
                                         types+="|"+type+"| ";
+
                                     }
                                     typeText.setText(types);
-                                    //['sprites']['front_default']
+                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
+
+
+
+
+
                                     String imageUrl= response.getJSONObject("sprites").getString("font_default");
                                     URL url = new URL(imageUrl);
                                     //scherzo fadda ti amo uwuwuwuwu
@@ -118,4 +133,11 @@ public class PokemonActivity extends AppCompatActivity {
 
     }
 
+
+
+  /*  public void onClickImage(View view){
+        ImageView imgPokemon=(ImageView) view;
+        if (imgPokemon.get)
+    }
+*/
   }

@@ -43,21 +43,15 @@ public class ListActivity extends AppCompatActivity {
         String id;
 
         this.RestCallPokemonNames();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //ATTENZIONE, questi nomi sono qui perche la rest call viene eseguita su un thread a parte, quindi capita che l'adapter carichi l'array prima che venga modificato.
 
-        nome[0]="Bulbasaur";
-        nome[1]="Ivysaur";
-        nome[2]="Venusaur";
-        nome[3]="Charmander";
-        nome[4]="Charmeleon";
-        nome[5]="Charizard";
-        nome[6]="Squirtle";
-        nome[7]="Wartortle";
-        nome[8]="Blastoise";
-        nome[9]="Caterpie";
-        nome[10]="Metapod";
-        nome[11]="Butterfree";
-        nome[12]="Weedle";
+
 
         for(int i=1; i<899;i++){
 
