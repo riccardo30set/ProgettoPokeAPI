@@ -2,6 +2,7 @@ package com.example.progettopokeapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -45,7 +46,10 @@ public class PokemonActivity extends AppCompatActivity {
         TextView descriptionText=findViewById(R.id.descriptionText);
         TextView typeText=findViewById(R.id.typeText);
         RequestQueue queue = Volley.newRequestQueue(PokemonActivity.this);
-        String url = "https://pokeapi.co/api/v2/pokemon/1";
+        Intent intent = getIntent();
+        String pokemonId=intent.getStringExtra("pokemonId");
+        String url = "https://pokeapi.co/api/v2/pokemon/"+pokemonId;
+
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONObject>() {
@@ -62,6 +66,7 @@ public class PokemonActivity extends AppCompatActivity {
                                     specialAttackProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(3).getInt("base_stat"));
                                     specialDefenseProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(4).getInt("base_stat"));
                                     speedProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(5).getInt("base_stat"));
+                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
                                     String types="";
                                     JSONArray arrayTypes=response.getJSONArray("types");
                                     for (int i=0;i<arrayTypes.length();i++){
@@ -71,7 +76,6 @@ public class PokemonActivity extends AppCompatActivity {
                                     typeText.setText(types);
                                     //['sprites']['front_default']
                                     String imageUrl= response.getJSONObject("sprites").getString("font_default");
-
                                     URL url = new URL(imageUrl);
                                     HttpURLConnection connection  = (HttpURLConnection) url.openConnection();
                                     InputStream is = connection.getInputStream();
@@ -84,10 +88,32 @@ public class PokemonActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        setTitle("no");
+                        setTitle("error");
                     }
+
                 });
         queue.add(jsonObjectRequest);
+        String urlDescription="https://pokeapi.co/api/v2/pokemon-species/"+pokemonId;
+        JsonObjectRequest jsonObjectRequestDescription= new JsonObjectRequest
+                (Request.Method.GET, urlDescription,null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        descriptionText.setText("error");
+                    }
+
+                });
+        queue.add(jsonObjectRequestDescription);
+
 
     }
 

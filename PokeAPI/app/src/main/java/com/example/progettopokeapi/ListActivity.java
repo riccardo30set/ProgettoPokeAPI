@@ -22,6 +22,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class ListActivity extends AppCompatActivity {
 
     int[] images=new int[898];
@@ -58,6 +60,7 @@ public class ListActivity extends AppCompatActivity {
         nome[12]="Weedle";
 
         for(int i=1; i<899;i++){
+
             id="pokemon"+i;
             images[i-1]=getResources().getIdentifier(id, "drawable", getPackageName());
             if(i<10)
@@ -78,6 +81,7 @@ public class ListActivity extends AppCompatActivity {
         listaPokemon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                intent.putExtra("pokemonId", (listaPokemon.getItemAtPosition(i+1).toString()));
                 startActivity(intent);
             }
         });
