@@ -18,8 +18,9 @@ public class ListAdapter extends BaseAdapter {
     private final String[] tipoPokemon;
     private final String[] nomePokemon;
     private final int[] img;
-
-
+    /*
+    private NameFilter filter;
+    */
     public ListAdapter(Context context, String[] tipoPokemon, String[] nomePokemon, int[] img) {
         this.context = context;
         this.tipoPokemon = tipoPokemon;
@@ -78,7 +79,7 @@ public class ListAdapter extends BaseAdapter {
         ImageView imgPokemon;
 
     }
-
+    /*
     @Override
     public Filter getFilter() {
         if (filter == null){
@@ -96,8 +97,9 @@ public class ListAdapter extends BaseAdapter {
             FilterResults result = new FilterResults();
             if(constraint != null && constraint.toString().length() > 0)
             {
-                ArrayList<SetRows> filteredItems = new ArrayList<SetRows>();
-
+                ArrayList<String> filteredItemsName = new ArrayList<String>();
+                ArrayList<String> filteredItemsid = new ArrayList<String>();
+                ArrayList<Integer> filteredItemsimage = new ArrayList<Integer>();
                 for(int i = 0, l = originalList.size(); i < l; i++)
                 {
                     SetRows nameList = originalList.get(i);
@@ -131,5 +133,6 @@ public class ListAdapter extends BaseAdapter {
             notifyDataSetInvalidated();
         }
     }
-
+}
+*/
 }
