@@ -47,13 +47,9 @@ public class PokemonActivity extends AppCompatActivity {
         ProgressBar speedProgressBar=findViewById(R.id.speedProgressBar);
         TextView descriptionText=findViewById(R.id.descriptionText);
         TextView typeText=findViewById(R.id.typeText);
-
-        final int maxStatsNumber=255;
-
         RequestQueue queue = Volley.newRequestQueue(PokemonActivity.this);
         Intent intent = getIntent();
         String pokemonId=intent.getStringExtra("pokemonId");
-
         String url = "https://pokeapi.co/api/v2/pokemon/"+pokemonId;
 
         Resources res = getResources();
@@ -61,9 +57,7 @@ public class PokemonActivity extends AppCompatActivity {
         int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
         pokemonImageView.setImageResource(resID);
         String pokemonName=intent.getStringExtra("pokemonName");
-
         setTitle(pokemonName);
-
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONObject>() {
