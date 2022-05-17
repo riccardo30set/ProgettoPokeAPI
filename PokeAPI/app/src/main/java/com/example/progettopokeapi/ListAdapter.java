@@ -71,19 +71,65 @@ public class ListAdapter extends BaseAdapter {
         return view;
     }
 
-
-
-
-
-
-
-
     private static class ViewHolder {
 
         TextView  txtNomePokemon;
         TextView txtTipoPokemon;
         ImageView imgPokemon;
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null){
+            filter  = new NameFilter();
+        }
+        return filter;
+    }
+    private class NameFilter extends Filter
+    {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            constraint = constraint.toString().toLowerCase();
+            FilterResults result = new FilterResults();
+            if(constraint != null && constraint.toString().length() > 0)
+            {
+                ArrayList<SetRows> filteredItems = new ArrayList<SetRows>();
+
+                for(int i = 0, l = originalList.size(); i < l; i++)
+                {
+                    SetRows nameList = originalList.get(i);
+                    if(nameList.toString().toLowerCase().contains(constraint))
+                        filteredItems.add(nameList);
+                }
+                result.count = filteredItems.size();
+                result.values = filteredItems;
+            }
+            else
+            {
+                synchronized(this)
+                {
+                    result.values = originalList;
+                    result.count = originalList.size();
+                }
+            }
+            return result;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+
+            data = (ArrayList<SetRows>)results.values;
+            notifyDataSetChanged();
+            clear();
+            for(int i = 0, l = data.size(); i < l; i++)
+                add(data.get(i));
+            notifyDataSetInvalidated();
+        }
     }
 
 }

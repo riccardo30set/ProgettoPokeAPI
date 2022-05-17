@@ -50,7 +50,7 @@ public class ListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         //ATTENZIONE, questi nomi sono qui perche la rest call viene eseguita su un thread a parte, quindi capita che l'adapter carichi l'array prima che venga modificato.
-
+        //niente fadda è gay e li ha tolti
 
 
         for(int i=1; i<899;i++){
