@@ -56,15 +56,14 @@ public class PokemonActivity extends AppCompatActivity {
         String mDrawableName = "pokemon"+pokemonId;
         int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
         pokemonImageView.setImageResource(resID);
-
+        String pokemonName=intent.getStringExtra("pokemonName");
+        setTitle(pokemonName);
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    String pokemonName=response.getString("name");
-                                    setTitle(pokemonName);
                                     Float height=Float.parseFloat(response.getString("height"))/10;
                                     heightTextView.setText(height.toString()+"m");
                                     Float weight=Float.parseFloat(response.getString("weight"))/10;

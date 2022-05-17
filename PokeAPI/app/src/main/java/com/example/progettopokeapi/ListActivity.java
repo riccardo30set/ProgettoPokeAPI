@@ -45,7 +45,7 @@ public class ListActivity extends AppCompatActivity {
         this.RestCallPokemonNames();
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -76,6 +76,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 intent.putExtra("pokemonId", (listaPokemon.getItemAtPosition(i+1).toString()));
+                intent.putExtra("pokemonName",(nome[i].toString()));
                 startActivity(intent);
             }
         });
