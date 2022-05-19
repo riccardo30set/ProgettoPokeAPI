@@ -1,3 +1,7 @@
+
+
+
+
 package com.example.progettopokeapi;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +10,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +37,10 @@ import java.net.URL;
 
 public class PokemonActivity extends AppCompatActivity {
 
+    String pokemonId;
+    Resources res;
+    int frontResID;
+    int currentImageViewID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,17 +57,22 @@ public class PokemonActivity extends AppCompatActivity {
         ProgressBar speedProgressBar=findViewById(R.id.speedProgressBar);
         TextView descriptionText=findViewById(R.id.descriptionText);
         TextView typeText=findViewById(R.id.typeText);
+
         RequestQueue queue = Volley.newRequestQueue(PokemonActivity.this);
         Intent intent = getIntent();
         String pokemonId=intent.getStringExtra("pokemonId");
+
         String url = "https://pokeapi.co/api/v2/pokemon/"+pokemonId;
 
-        Resources res = getResources();
-        String mDrawableName = "pokemon"+pokemonId;
-        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
-        pokemonImageView.setImageResource(resID);
+        res = getResources();
+        String imageFrontName = "pokemon"+pokemonId;
+        frontResID = res.getIdentifier(imageFrontName , "drawable", getPackageName());
+        pokemonImageView.setImageResource(frontResID);
+        currentImageViewID=frontResID;
         String pokemonName=intent.getStringExtra("pokemonName");
+
         setTitle(pokemonName);
+
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
                 (Request.Method.GET, url,null,
                         new Response.Listener<JSONObject>() {
@@ -79,24 +94,14 @@ public class PokemonActivity extends AppCompatActivity {
                                     String types="";
                                     for (int i=0;i<arrayTypes.length();i++){
                                         String type=arrayTypes.getJSONObject(i).getJSONObject("type").getString("name");
-                                        types+="|"+type+"| ";
+                                        types+=type+",";
 
                                     }
                                     typeText.setText(types);
                                     descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
-
-
-
-
-
-                                    String imageUrl= response.getJSONObject("sprites").getString("font_default");
-                                    URL url = new URL(imageUrl);
                                     //scherzo fadda ti amo uwuwuwuwu
-                                    HttpURLConnection connection  = (HttpURLConnection) url.openConnection();
-                                    InputStream is = connection.getInputStream();
-                                    Bitmap img = BitmapFactory.decodeStream(is);
-                                    pokemonImageView.setImageBitmap(img );
-                                } catch (JSONException | IOException e) {
+
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -134,9 +139,23 @@ public class PokemonActivity extends AppCompatActivity {
 
 
 
-  /*  public void onClickImage(View view){
+    public void onClickImage(View view){
         ImageView imgPokemon=(ImageView) view;
-        if (imgPokemon.get)
+        String pokemonId=getIntent().getStringExtra("pokemonId");
+        String imageBackName = "pokemonretro"+pokemonId;
+        int backResID = res.getIdentifier(imageBackName , "drawable", getPackageName());
+        if(backResID!=0){
+            if (currentImageViewID==frontResID){
+                imgPokemon.setImageResource(backResID);
+                currentImageViewID=backResID;
+
+            }else if(currentImageViewID==backResID){
+                imgPokemon.setImageResource(frontResID);
+                currentImageViewID=frontResID;
+            }
+        }
+
+
     }
-*/
-  }
+
+}
