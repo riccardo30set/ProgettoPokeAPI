@@ -32,8 +32,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 public class PokemonActivity extends AppCompatActivity {
 
@@ -57,6 +59,12 @@ public class PokemonActivity extends AppCompatActivity {
         ProgressBar speedProgressBar=findViewById(R.id.speedProgressBar);
         TextView descriptionText=findViewById(R.id.descriptionText);
         TextView typeText=findViewById(R.id.typeText);
+        TextView hpText=findViewById(R.id.hpText);
+        TextView attackText=findViewById(R.id.attackText);
+        TextView specialAttackText=findViewById(R.id.specialAttackText);
+        TextView defenseText=findViewById(R.id.defenseText);
+        TextView specialDefenseText=findViewById(R.id.specialDefenseText);
+        TextView speedText=findViewById(R.id.speedText);
 
         RequestQueue queue = Volley.newRequestQueue(PokemonActivity.this);
         Intent intent = getIntent();
@@ -84,12 +92,26 @@ public class PokemonActivity extends AppCompatActivity {
                                     Float weight=Float.parseFloat(response.getString("weight"))/10;
                                     weightTextView.setText(weight.toString()+"kg");
 
-                                    hpProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(0).getInt("base_stat"));
-                                    attackProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(1).getInt("base_stat"));
-                                    defenseProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(2).getInt("base_stat"));
-                                    specialAttackProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(3).getInt("base_stat"));
-                                    specialDefenseProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(4).getInt("base_stat"));
-                                    speedProgressBar.setProgress(response.getJSONArray("stats").getJSONObject(5).getInt("base_stat"));
+                                    int[] arrayStats=new int[6];
+                                    int indexHp=0,indexAttack=1,indexDefense=2,indexSpecialAttack=3,indexSpecialDefense=4,indexSpeed=5;
+
+                                    for (int i=0;i<arrayStats.length;i++){
+                                        arrayStats[i]=response.getJSONArray("stats").getJSONObject(i).getInt("base_stat");
+                                    }
+
+                                    hpText.setText("PS: "+arrayStats[indexHp]);
+                                    hpProgressBar.setProgress(arrayStats[indexHp]);
+                                    attackText.setText("Attack: "+arrayStats[indexAttack]);
+                                    attackProgressBar.setProgress(arrayStats[indexAttack]);
+                                    defenseText.setText("Defense: "+arrayStats[indexDefense]);
+                                    defenseProgressBar.setProgress(arrayStats[indexDefense]);
+                                    specialAttackText.setText("Sp.attack: "+arrayStats[indexSpecialAttack]);
+                                    specialAttackProgressBar.setProgress(arrayStats[indexSpecialAttack]);
+                                    specialDefenseProgressBar.setProgress(arrayStats[indexSpecialDefense]);
+                                    specialDefenseText.setText("Sp.defense: "+arrayStats[indexSpecialDefense]);
+                                    speedText.setText("Speed: "+arrayStats[indexSpeed]);
+                                    speedProgressBar.setProgress(arrayStats[indexSpeed]);
+
                                     JSONArray arrayTypes=response.getJSONArray("types");
                                     String types="";
                                     for (int i=0;i<arrayTypes.length();i++){
@@ -97,8 +119,9 @@ public class PokemonActivity extends AppCompatActivity {
                                         types+=type+",";
 
                                     }
+                                    types=types.substring(0,types.length()-1);
                                     typeText.setText(types);
-                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
+
                                     //scherzo fadda ti amo uwuwuwuwu
 
                                 } catch (JSONException e) {
@@ -120,9 +143,38 @@ public class PokemonActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(81).getString("flavor_text"));
+                                    //['flavor_text_entries'][variabile]['version']['name'] versione gioco "sword"
+                                    //['flavor_text_entries'][variabile]['language']['name'] lingua "en"
+
+
+
+                                    boolean correctDescription=false;
+                                    int i=0;
+                                    String secondDescription="";
+                                   while(!correctDescription && i<response.getJSONArray("flavor_text_entries").length() ){
+                                       String value= String.valueOf(i);
+                                       Log.d("giro", value);
+                                       String gen=response.getJSONArray("flavor_text_entries").getJSONObject(i).getJSONObject("version").getString("name");
+                                        String lang=response.getJSONArray("flavor_text_entries").getJSONObject(i).getJSONObject("language").getString("name");
+                                        Log.d("lang",lang);
+                                        Log.d("gen",gen);
+                                        if (lang.equals("en")){
+                                            secondDescription=response.getJSONArray("flavor_text_entries").getJSONObject(i).getString("flavor_text");
+                                            if ((gen.equals("shield") || gen.equals("sword")) ){
+                                                correctDescription=true;
+                                                descriptionText.setText(response.getJSONArray("flavor_text_entries").getJSONObject(i).getString("flavor_text"));
+                                            }
+                                        }
+                                        i++;
+                                    }
+                                   if (descriptionText.getText().equals("...")){
+                                       descriptionText.setText(secondDescription);
+                                   }
+
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    descriptionText.setText("error");
                                 }
                             }
                         }, new Response.ErrorListener() {

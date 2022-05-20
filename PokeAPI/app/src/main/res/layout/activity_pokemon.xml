@@ -14,6 +14,8 @@
         android:layout_marginStart="288dp"
         android:layout_marginTop="540dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorSpeed"
+        android:progressTint="@color/secondColorSpeed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +26,8 @@
         android:layout_height="20dp"
         android:layout_marginTop="464dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorDifense"
+        android:progressTint="@color/secondColorDifense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +40,8 @@
         android:layout_height="20dp"
         android:layout_marginTop="540dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorSpecialAttack"
+        android:progressTint="@color/secondColorSpecialAttack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +54,8 @@
         android:layout_height="20dp"
         android:layout_marginTop="464dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorHP"
+        android:progressTint="@color/secondColorHP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,13 +68,15 @@
         android:layout_height="20dp"
         android:layout_marginTop="540dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorSpecialDifense"
+        android:progressTint="@color/secondColorSpecialDifense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText10"
+        android:id="@+id/defenseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
@@ -80,7 +90,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText13"
+        android:id="@+id/speedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="288dp"
@@ -92,7 +102,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText12"
+        android:id="@+id/specialDefenseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
@@ -105,7 +115,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText11"
+        android:id="@+id/specialAttackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
@@ -118,7 +128,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText9"
+        android:id="@+id/hpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
@@ -132,7 +142,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionText6"
+        android:id="@+id/attackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
@@ -166,6 +176,8 @@
         android:layout_height="20dp"
         android:layout_marginTop="464dp"
         android:max="255"
+        android:progressBackgroundTint="@color/colorAttack"
+        android:progressTint="@color/secondColorAttack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,8 +198,8 @@
 
     <TextView
         android:id="@+id/descriptionText"
-        android:layout_width="335dp"
-        android:layout_height="84dp"
+        android:layout_width="334dp"
+        android:layout_height="110dp"
         android:layout_marginTop="616dp"
         android:fontFamily="@font/pokemon_pixel_font"
         android:text="..."
