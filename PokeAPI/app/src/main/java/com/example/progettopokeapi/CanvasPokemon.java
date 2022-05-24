@@ -129,9 +129,9 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
     public void onClick(View view) {
 
 
+        Intent intent=new Intent(getContext(),ListActivity.class);
 
-
-
+        getContext().startActivity(intent);
 
 
 

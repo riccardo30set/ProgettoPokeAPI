@@ -1,16 +1,16 @@
 package com.example.progettopokeapi;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,24 +34,15 @@ public class ListActivity extends AppCompatActivity {
 
     ListView listaPokemon;
 
-    ListAdapter lAdapter;
+    LAdapter lAdapter;
+    ArrayList<ModelPokemon> arrayList =new ArrayList<ModelPokemon>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         String id;
-
-        this.RestCallPokemonNames();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //ATTENZIONE, questi nomi sono qui perche la rest call viene eseguita su un thread a parte, quindi capita che l'adapter carichi l'array prima che venga modificato.
-        //niente fadda è gay e li ha tolti
-
+        //this.RestCallPokemonNames();
 
         for(int i=1; i<899;i++){
 
@@ -63,10 +54,26 @@ public class ListActivity extends AppCompatActivity {
                 tipoPokemon[i-1]="#0"+i;
             else
                 tipoPokemon[i-1]="#"+i;
+            ModelPokemon model=new ModelPokemon(nome[i-1],tipoPokemon[i-1],images[i-1]);
+            arrayList.add(model);
         }
+        arrayList.get(0).setName("Bulbasaur");
+        arrayList.get(1).setName("Ivysaur");
+        arrayList.get(2).setName("Venusaur");
+        arrayList.get(3).setName("Charmader");
+        arrayList.get(4).setName("Charmeleon");
+        arrayList.get(5).setName("Charizard");
+        arrayList.get(6).setName("Squirtle");
+        arrayList.get(7).setName("Wartortole");
+        arrayList.get(8).setName("Blastoise");
+        arrayList.get(9).setName("Caterpie");
+        arrayList.get(10).setName("Metapod");
+        arrayList.get(11).setName("Butterfly");
+        this.RestCallPokemonNames(arrayList);
+
         listaPokemon=(ListView)findViewById(R.id.listPokedex);
 
-        lAdapter=new com.example.progettopokeapi.ListAdapter(this,tipoPokemon,nome,images);
+        lAdapter=new LAdapter(this,arrayList);
 
         listaPokemon.setAdapter(lAdapter);
 
@@ -75,14 +82,16 @@ public class ListActivity extends AppCompatActivity {
         listaPokemon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                intent.putExtra("pokemonId", (listaPokemon.getItemAtPosition(i+1).toString()));
-                intent.putExtra("pokemonName",(nome[i].toString()));
+                String p=""+(i+1);
+                intent.putExtra("pokemonId", p);
+                String prova=arrayList.get(i).getName().toString();
+                intent.putExtra("pokemonName",prova);
                 startActivity(intent);
             }
         });
 
     }
-    public void RestCallPokemonNames(){
+    public void RestCallPokemonNames( ArrayList<ModelPokemon> modelPokemons){
         RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
         String url = "https://pokeapi.co/api/v2/pokedex/1/";
 
@@ -93,8 +102,8 @@ public class ListActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 for(int i=1;i<899;i++){
                                     try {
-                                        nome[i-1]=response.getJSONArray("pokemon_entries").getJSONObject(i-1).getJSONObject("pokemon_species").getString("name");
-                                        nome[i-1]=nome[i-1].substring(0,1).toUpperCase()+nome[i-1].substring(1,nome[i-1].length());
+                                        modelPokemons.get(i-1).setName(response.getJSONArray("pokemon_entries").getJSONObject(i-1).getJSONObject("pokemon_species").getString("name"));
+                                        modelPokemons.get(i-1).setName(modelPokemons.get(i-1).getName().substring(0,1).toUpperCase()+modelPokemons.get(i-1).getName().substring(1,modelPokemons.get(i-1).getName().length()));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -104,7 +113,7 @@ public class ListActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         for(int i=1;i<899;i++){
-                            nome[i-1]="ERRORE, VIVA NAPOLI";
+                            modelPokemons.get(i-1).setName("ERRORE, VIVA NAPOLI");
                         }
                     }
                 });
@@ -128,18 +137,15 @@ public class ListActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-
-
-
-
-
-
+                if(TextUtils.isEmpty(s)){
+                    lAdapter.filter("");
+                    listaPokemon.clearTextFilter();
+                }else{
+                    lAdapter.filter(s);
+                }
                 return false;
             }
         });
-
-
-
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 }
