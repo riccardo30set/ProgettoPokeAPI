@@ -24,7 +24,7 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
     Paint cerchio;
     Paint bordoCerchio;
     Matrix matrix;
-
+    boolean started;
 
     private float x,y;
     private float velx,vely;
@@ -42,7 +42,7 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
         cerchio=new Paint();
         bordoCerchio=new Paint();
         matrix=new Matrix();
-
+        started=false;
         setOnClickListener(this);
         setOnLongClickListener(this);
 
@@ -59,35 +59,20 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
 
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-
-
         cerchio.setColor(Color.WHITE);
         cerchio.setStrokeWidth(500);
         cerchio.setTextAlign(Paint.Align.CENTER);
-
         bordoCerchio.setColor(Color.BLACK);
         bordoCerchio.setStrokeWidth(50);
         bordoCerchio.setTextAlign(Paint.Align.CENTER);
-
-
         paint.setColor(Color.RED);
         paint.setStrokeWidth(5);
         paint.setTextAlign(Paint.Align.CENTER);
-
-
         matrix.reset();
         matrix.postTranslate(canvas.getWidth()/90,-canvas.getHeight()/50);
         matrix.postRotate(-10);
 
-
-
-
         canvas.drawColor(Color.WHITE);
-
-
-
-
-
 
         canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight()/2,paint);
 
@@ -99,47 +84,27 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
 
         canvas.drawBitmap(logo,canvas.getClipBounds().left+70,canvas.getClipBounds().left,null);
 
-
         canvas.drawBitmap(pikachu, matrix, null);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
 
     @Override
     public void onClick(View view) {
-
         Intent intent=new Intent(getContext(),ListActivity.class);
-
         getContext().startActivity(intent);
-
-
-
-
     }
 
 
     @Override
     public boolean onLongClick(View view) {
-
-        Easter_EGG.start();
-
-
+        if(!started){
+            Easter_EGG.start();
+            started=true;
+        }else{
+            Easter_EGG.stop();
+            started=false;
+        }
         return false;
     }
 }
