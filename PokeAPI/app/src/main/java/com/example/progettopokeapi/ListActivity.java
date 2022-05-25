@@ -28,8 +28,6 @@ public class ListActivity extends AppCompatActivity {
 
     int[] images=new int[898];
 
-    String[] nome= new String[898];
-
     String[] tipoPokemon= new String[898];
 
     ListView listaPokemon;
@@ -54,7 +52,7 @@ public class ListActivity extends AppCompatActivity {
                 tipoPokemon[i-1]="#0"+i;
             else
                 tipoPokemon[i-1]="#"+i;
-            ModelPokemon model=new ModelPokemon(nome[i-1],tipoPokemon[i-1],images[i-1]);
+            ModelPokemon model=new ModelPokemon(null,tipoPokemon[i-1],images[i-1]);
             arrayList.add(model);
         }
         arrayList.get(0).setName("Bulbasaur");
@@ -89,7 +87,6 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
     public void RestCallPokemonNames( ArrayList<ModelPokemon> modelPokemons){
         RequestQueue queue = Volley.newRequestQueue(ListActivity.this);
