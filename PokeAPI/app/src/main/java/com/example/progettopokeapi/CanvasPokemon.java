@@ -10,8 +10,11 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.media.metrics.Event;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.Toast;
 
 
 public class CanvasPokemon extends View implements View.OnClickListener, View.OnLongClickListener{
@@ -30,6 +33,7 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
 
 
     private MediaPlayer Easter_EGG;
+    private Object Event;
 
     public CanvasPokemon(Context context) {
         super(context);
@@ -47,10 +51,7 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
 
         Easter_EGG=MediaPlayer.create(context,R.raw.easter);
 
-        x=2;
-        y=2;
-        velx=2;
-        vely=3;
+
 
 
 
@@ -99,17 +100,12 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
         canvas.drawBitmap(logo,canvas.getClipBounds().left+70,canvas.getClipBounds().left,null);
 
 
-        canvas.drawBitmap(pikachu, x, y, null);
-        x+=velx;
-        y+=vely;
-        if(x+pikachu.getWidth()>canvas.getWidth() || x<0){
-            velx=-velx;
-        }
-        if(y+pikachu.getHeight()>canvas.getHeight() || y<0){
-            vely=-vely;
-        }
+        canvas.drawBitmap(pikachu, matrix, null);
 
-        invalidate();
+
+
+
+
 
 
 
@@ -128,10 +124,10 @@ public class CanvasPokemon extends View implements View.OnClickListener, View.On
     @Override
     public void onClick(View view) {
 
-
         Intent intent=new Intent(getContext(),ListActivity.class);
 
         getContext().startActivity(intent);
+
 
 
 
