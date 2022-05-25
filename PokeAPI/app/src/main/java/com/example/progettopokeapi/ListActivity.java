@@ -30,6 +30,7 @@ public class ListActivity extends AppCompatActivity {
 
     String[] tipoPokemon= new String[898];
 
+    String[] nomePokemon= new String[898];
     ListView listaPokemon;
 
     LAdapter lAdapter;
@@ -80,10 +81,16 @@ public class ListActivity extends AppCompatActivity {
         listaPokemon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String p=""+(i+1);
-                intent.putExtra("pokemonId", p);
-                String prova=arrayList.get(i).getName().toString();
-                intent.putExtra("pokemonName",prova);
+                String pkName=arrayList.get(i).getName().toString();
+                intent.putExtra("pokemonName",pkName);
+                String id="";
+                for(int t=1; t<nomePokemon.length;t++){
+                    if(nomePokemon[t-1].equals(pkName)){
+                        id+=t;
+                        t=nomePokemon.length;
+                    }
+                }
+                intent.putExtra("pokemonId", id);
                 startActivity(intent);
             }
         });
@@ -101,6 +108,7 @@ public class ListActivity extends AppCompatActivity {
                                     try {
                                         modelPokemons.get(i-1).setName(response.getJSONArray("pokemon_entries").getJSONObject(i-1).getJSONObject("pokemon_species").getString("name"));
                                         modelPokemons.get(i-1).setName(modelPokemons.get(i-1).getName().substring(0,1).toUpperCase()+modelPokemons.get(i-1).getName().substring(1,modelPokemons.get(i-1).getName().length()));
+                                        nomePokemon[i-1]=modelPokemons.get(i-1).getName();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -127,6 +135,8 @@ public class ListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
+
                 return false;
             }
 
