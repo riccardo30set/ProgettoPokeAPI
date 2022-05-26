@@ -84,7 +84,7 @@ public class ListActivity extends AppCompatActivity {
                 String pkName=arrayList.get(i).getName().toString();
                 intent.putExtra("pokemonName",pkName);
                 String id="";
-                for(int t=1; t<nomePokemon.length;t++){
+                for(int t=1; t<(nomePokemon.length+1);t++){
                     if(nomePokemon[t-1].equals(pkName)){
                         id+=t;
                         t=nomePokemon.length;
