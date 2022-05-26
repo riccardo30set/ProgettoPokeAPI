@@ -99,17 +99,17 @@ public class PokemonActivity extends AppCompatActivity {
                                         arrayStats[i]=response.getJSONArray("stats").getJSONObject(i).getInt("base_stat");
                                     }
 
-                                    hpText.setText("PS: "+arrayStats[indexHp]);
+                                    hpText.setText(hpText.getText().toString()+arrayStats[indexHp]);
                                     hpProgressBar.setProgress(arrayStats[indexHp]);
-                                    attackText.setText("Attack: "+arrayStats[indexAttack]);
+                                    attackText.setText(attackText.getText().toString()+arrayStats[indexAttack]);
                                     attackProgressBar.setProgress(arrayStats[indexAttack]);
-                                    defenseText.setText("Defense: "+arrayStats[indexDefense]);
+                                    defenseText.setText(defenseText.getText().toString()+arrayStats[indexDefense]);
                                     defenseProgressBar.setProgress(arrayStats[indexDefense]);
-                                    specialAttackText.setText("Sp.attack: "+arrayStats[indexSpecialAttack]);
+                                    specialAttackText.setText(specialAttackText.getText().toString()+arrayStats[indexSpecialAttack]);
                                     specialAttackProgressBar.setProgress(arrayStats[indexSpecialAttack]);
                                     specialDefenseProgressBar.setProgress(arrayStats[indexSpecialDefense]);
-                                    specialDefenseText.setText("Sp.defense: "+arrayStats[indexSpecialDefense]);
-                                    speedText.setText("Speed: "+arrayStats[indexSpeed]);
+                                    specialDefenseText.setText(specialDefenseText.getText().toString()+arrayStats[indexSpecialDefense]);
+                                    speedText.setText(speedText.getText().toString()+arrayStats[indexSpeed]);
                                     speedProgressBar.setProgress(arrayStats[indexSpeed]);
 
                                     JSONArray arrayTypes=response.getJSONArray("types");

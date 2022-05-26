@@ -81,11 +81,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="defense"
+        android:text="DEF: "
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
+        app:layout_constraintHorizontal_bias="0.755"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,7 +96,7 @@
         android:layout_marginStart="288dp"
         android:layout_marginTop="520dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="speed"
+        android:text="SPEED: "
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -107,10 +107,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="special-defense"
+        android:text="SP.DEF: "
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -120,10 +120,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="520dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="special-attack"
+        android:text="SP.ATK: "
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="hp"
+        android:text="PS: "
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,11 +147,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
         android:fontFamily="@font/pokemon_pixel_font"
-        android:text="attack"
+        android:text="ATK: "
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
